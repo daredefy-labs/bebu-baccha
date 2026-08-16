@@ -4,19 +4,477 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>S ❤️ S | Our Private Universe</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Our Private Universe 🙌</title>
+
+    <!-- CUSTOM ROMANTIC FAVICON -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><defs><linearGradient id='heartGrad' x1='0%' y1='0%' x2='100%' y2='100%'><stop offset='0%' stop-color='%23ff4b91'/><stop offset='100%' stop-color='%23d946ef'/></linearGradient></defs><path d='M50 88 C20 60 5 40 5 25 A 20 20 0 0 1 42 12 L 50 20 L 58 12 A 20 20 0 0 1 95 25 C 95 40 80 60 50 88 Z' fill='url(%23heartGrad)'/><path d='M32 28 Q 38 20 44 30' stroke='%23ffffff' stroke-width='3.5' stroke-linecap='round' fill='none' opacity='0.85'/></svg>">
+
     <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' 'unsafe-eval'; img-src * data: blob:; media-src * blob:;">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&display=swap"
-        rel="stylesheet">
+    
+    <!-- ENHANCED ROMANTIC & STYLISH FONTS -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Great+Vibes&family=Sacramento&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+
+        /* INSTANT THEME SWITCHING WITH GLASSMORPHISM TRANSPARENCY */
+        body {
+            background: linear-gradient(135deg, #ffeef5, #ffd1e6, #fce4ec);
+            background-attachment: fixed;
+            color: #2d3748;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            user-select: none;
+            transition: none !important;
+        }
+
+        /* HIGH-CONTRAST & GLASSY DARK MODE STYLES */
+        body.dark-mode {
+            background: linear-gradient(135deg, #0d0312, #1a0624, #2d0b3a) !important;
+            background-attachment: fixed !important;
+            color: #f1f5f9 !important;
+        }
+
+        body.dark-mode nav {
+            background: rgba(18, 6, 24, 0.85) !important;
+            border-bottom-color: rgba(217, 70, 239, 0.4) !important;
+        }
+
+        body.dark-mode .nav-btn {
+            color: #cbd5e1;
+        }
+
+        body.dark-mode .nav-btn:hover, body.dark-mode .nav-btn.active {
+            color: #f472b6;
+            background: rgba(217, 70, 239, 0.2);
+        }
+
+        /* GLASS CARD EFFECT FOR BOTH LIGHT & DARK MODES */
+        .romantic-card,
+        .hero-card,
+        .modal-card,
+        .panel,
+        .user-card-mini,
+        .chat-box,
+        .node {
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 182, 217, 0.6);
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(255, 75, 145, 0.1);
+            margin-bottom: 20px;
+            padding: 25px;
+            position: relative;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        body.dark-mode .romantic-card,
+        body.dark-mode .hero-card,
+        body.dark-mode .modal-card,
+        body.dark-mode .panel,
+        body.dark-mode .user-card-mini,
+        body.dark-mode .chat-box,
+        body.dark-mode .node {
+            background: rgba(24, 9, 28, 0.85) !important;
+            backdrop-filter: blur(12px) !important;
+            -webkit-backdrop-filter: blur(12px) !important;
+            color: #f8fafc !important;
+            border: 1px solid rgba(217, 70, 239, 0.35) !important;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+        }
+
+        body.dark-mode h1, body.dark-mode h2, body.dark-mode h3, body.dark-mode h4, body.dark-mode .lbl {
+            color: #f472b6 !important;
+        }
+
+        body.dark-mode .quote-item,
+        body.dark-mode .highlight-quote,
+        body.dark-mode .status-header,
+        body.dark-mode .nickname-grid div,
+        body.dark-mode .counter-box {
+            background: rgba(45, 15, 52, 0.75) !important;
+            color: #f472b6 !important;
+            border-color: rgba(217, 70, 239, 0.4) !important;
+        }
+
+        body.dark-mode .msg.you {
+            background: rgba(56, 28, 64, 0.9) !important;
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .bar input,
+        body.dark-mode .login-input,
+        body.dark-mode #modalBioInput,
+        body.dark-mode #modalMoodSelect {
+            background: rgba(25, 10, 30, 0.9) !important;
+            color: #ffffff !important;
+            border-color: rgba(168, 85, 247, 0.5) !important;
+        }
+
+        body.dark-mode .story-section p,
+        body.dark-mode .node p,
+        body.dark-mode .val,
+        body.dark-mode .hero-subtitle,
+        body.dark-mode .quote-text {
+            color: #e2e8f0 !important;
+        }
+
+        /* DARK MODE ADJUSTMENTS FOR LOVE JAR & INSPECT PROFILE BOXES */
+        .love-jar-box {
+            background: rgba(255, 240, 245, 0.85);
+            padding: 18px;
+            border-radius: 15px;
+            border: 1px dashed #ff4b91;
+            margin: 12px 0;
+        }
+
+        .inspect-bio-box {
+            text-align: left;
+            background: rgba(253, 251, 253, 0.9);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid #ffb6d9;
+        }
+
+        .inspect-mood-badge {
+            background: #fff0f5;
+            color: #ff4b91;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            display: inline-block;
+            margin-bottom: 15px;
+            border: 1px solid #ffb6d9;
+        }
+
+        body.dark-mode .love-jar-box,
+        body.dark-mode .inspect-bio-box {
+            background: rgba(45, 15, 52, 0.85) !important;
+            border-color: rgba(217, 70, 239, 0.5) !important;
+        }
+
+        body.dark-mode #loveJarText,
+        body.dark-mode #inspectBio {
+            color: #f8fafc !important;
+        }
+
+        body.dark-mode .inspect-mood-badge {
+            background: rgba(217, 70, 239, 0.25) !important;
+            color: #f472b6 !important;
+            border-color: rgba(217, 70, 239, 0.5) !important;
+        }
+
+        /* TOP RIGHT THEME TOGGLE BUTTON */
+        .theme-toggle-btn {
+            position: fixed;
+            top: 14px;
+            right: 15px;
+            z-index: 10001;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #ff4b91;
+            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease;
+            backdrop-filter: blur(6px);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+        }
+
+        body.dark-mode .theme-toggle-btn {
+            background: rgba(35, 15, 40, 0.9);
+            border-color: #d946ef;
+            color: #fff;
+        }
+
+        /* FLOATING BACKGROUND MUSIC PLAYER BUTTON */
+        .music-float-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 10001;
+            background: #ff4b91;
+            color: white;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            width: 52px;
+            height: 52px;
+            font-size: 22px;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(255, 75, 145, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background 0.2s ease;
+        }
+
+        .music-float-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .music-float-btn.playing {
+            animation: spinMusicIcon 3s linear infinite;
+            background: #d946ef;
+            box-shadow: 0 0 18px rgba(217, 70, 239, 0.8);
+        }
+
+        @keyframes spinMusicIcon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .universe-title {
+            font-family: 'Sacramento', 'Great Vibes', cursive !important;
+            font-size: 3.5rem !important;
+            background: linear-gradient(45deg, #ff4b91, #d946ef, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0px 4px 18px rgba(217, 70, 239, 0.3);
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+        
+        .hero-subtitle {
+            font-family: 'Dancing Script', cursive, sans-serif !important;
+            font-size: 1.55rem !important;
+            color: #d946ef !important;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        /* Premium Soft Navbar with Mobile Smooth Scroll */
+        nav {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            padding: 15px 70px 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(255, 182, 217, 0.6);
+            position: sticky;
+            top: 0; z-index: 1000;
+        }
+
+        .logo { font-family: 'Great Vibes', cursive; font-size: 32px; color: #ff4b91; font-weight: bold; flex-shrink: 0; }
+        .nav-links { display: flex; gap: 10px; align-items: center; }
+        .nav-btn { background: transparent; border: none; padding: 8px 14px; border-radius: 12px; font-size: 13px; font-weight: 600; color: #4a5568; cursor: pointer; flex-shrink: 0; }
+        .nav-btn:hover, .nav-btn.active { color: #ff4b91; background: rgba(255, 240, 246, 0.8); }
+        .logout-btn { color: #ff4b91; border: 1px solid #ffb6d9; }
+
+        @media (max-width: 768px) {
+            nav { flex-direction: column; padding: 12px 60px 12px 12px; gap: 12px; }
+            .nav-links { 
+                width: 100%; 
+                overflow-x: auto; 
+                scroll-behavior: smooth; 
+                -webkit-overflow-scrolling: touch; 
+                justify-content: flex-start;
+                padding-bottom: 5px; 
+            }
+            .nav-links::-webkit-scrollbar { display: none; }
+        }
+
+        /* Views */
+        .container { flex: 1; padding: 20px 15px; max-width: 900px; margin: 0 auto; width: 100%; position: relative; z-index: 10; }
+        .view-hidden { display: none !important; }
+        .view-active { display: block !important; animation: fadeIn 0.3s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* GLOBAL FLOATING EMOJIS BACKGROUND */
+        .floating-hearts-bg { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; overflow: hidden; z-index: 0; pointer-events: none; }
+        .f-heart { position: absolute; bottom: -50px; opacity: 0; animation: floatUp 10s linear infinite; }
+
+        .f-heart:nth-child(1) { left: 5%; animation-delay: 0s; font-size: 38px; }
+        .f-heart:nth-child(2) { left: 10%; animation-delay: 1.2s; font-size: 32px; }
+        .f-heart:nth-child(3) { left: 15%; animation-delay: 2.5s; font-size: 45px; }
+        .f-heart:nth-child(4) { left: 20%; animation-delay: 0.5s; font-size: 35px; }
+        .f-heart:nth-child(5) { left: 25%; animation-delay: 3s; font-size: 40px; }
+        .f-heart:nth-child(6) { left: 30%; animation-delay: 4.5s; font-size: 42px; }
+        .f-heart:nth-child(7) { left: 35%; animation-delay: 1s; font-size: 30px; }
+        .f-heart:nth-child(8) { left: 40%; animation-delay: 6s; font-size: 38px; }
+        .f-heart:nth-child(9) { left: 45%; animation-delay: 0.8s; font-size: 40px; }
+        .f-heart:nth-child(10) { left: 50%; animation-delay: 3.5s; font-size: 34px; }
+        .f-heart:nth-child(11) { left: 55%; animation-delay: 2s; font-size: 42px; }
+        .f-heart:nth-child(12) { left: 60%; animation-delay: 5s; font-size: 36px; }
+        .f-heart:nth-child(13) { left: 65%; animation-delay: 0.2s; font-size: 45px; }
+        .f-heart:nth-child(14) { left: 70%; animation-delay: 4s; font-size: 38px; }
+        .f-heart:nth-child(15) { left: 75%; animation-delay: 1.5s; font-size: 34px; }
+        .f-heart:nth-child(16) { left: 80%; animation-delay: 2.8s; font-size: 40px; }
+        .f-heart:nth-child(17) { left: 85%; animation-delay: 0.4s; font-size: 36px; }
+        .f-heart:nth-child(18) { left: 90%; animation-delay: 3.2s; font-size: 32px; }
+        .f-heart:nth-child(19) { left: 5%; animation-delay: 5.5s; font-size: 40px; }
+        .f-heart:nth-child(20) { left: 15%; animation-delay: 0.7s; font-size: 35px; }
+        .f-heart:nth-child(21) { left: 95%; animation-delay: 2s; font-size: 38px; }
+        .f-heart:nth-child(22) { left: 45%; animation-delay: 6.5s; font-size: 32px; }
+        .f-heart:nth-child(23) { left: 55%; animation-delay: 1.8s; font-size: 45px; }
+        .f-heart:nth-child(24) { left: 25%; animation-delay: 3.8s; font-size: 30px; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0.85; }
+            100% { transform: translateY(-120vh) rotate(360deg); opacity: 0; }
+        }
+
+        .landing-top-header { text-align: center; margin-bottom: 30px; position: relative; z-index: 5; }
+        
+        @media (max-width: 768px) {
+            .universe-title { font-size: 2.2rem !important; letter-spacing: 1px; }
+            .hero-title { font-size: 28px; }
+        }
+
+        /* Landing Section */
+        .hero-card { padding: 50px 30px; border: 2px solid #ff4b91; box-shadow: 0 15px 40px rgba(255,75,145,0.15); }
+        .hero-title { font-size: 32px; color: #ff4b91; margin-bottom: 15px; font-family: 'Great Vibes', cursive; line-height: 1.2; }
+        .hero-subtitle { font-size: 14px; color: #666; font-style: italic; margin-bottom: 25px; }
+        .heart-pulse { font-size: 55px; margin-bottom: 25px; animation: pulse 1.5s infinite; }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+        .action-glow-btn { padding: 12px 30px; background: #ff4b91; color: white; border: none; border-radius: 30px; font-weight: bold; font-size: 14px; cursor: pointer; box-shadow: 0 6px 20px rgba(255,75,145,0.3); transition: transform 0.2s; }
+        .action-glow-btn:hover { transform: translateY(-2px); }
+
+        /* LOVE DAY COUNTER WIDGET */
+        .counter-grid { display: flex; justify-content: center; gap: 12px; margin-top: 15px; flex-wrap: wrap; }
+        .counter-box { background: rgba(255, 240, 245, 0.8); border: 1px solid #ffb6d9; padding: 10px 16px; border-radius: 15px; text-align: center; min-width: 75px; }
+        .counter-num { font-size: 22px; font-weight: 700; color: #ff4b91; line-height: 1.1; }
+        .counter-lbl { font-size: 11px; text-transform: uppercase; color: #666; font-weight: 600; }
+
+        /* Modals */
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0, 0, 0, 0.6); backdrop-filter: blur(6px); display: none; justify-content: center; align-items: center; z-index: 99999; }
+        .modal-overlay.open { display: flex; }
+        .modal-card { width: 90%; max-width: 380px; padding: 30px; border: 2px solid #ff4b91; text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.2); }
+        .login-input { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ffb6d9; border-radius: 20px; outline: none; text-align: center; font-size: 14px; }
+        .login-btn { width: 100%; padding: 12px; background: #ff4b91; border: none; color: white; border-radius: 20px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .modal-close-txt-btn { background: transparent; border: none; color: #888; font-size: 12px; margin-top: 15px; text-decoration: underline; cursor: pointer; }
+
+        /* Quotes Feed */
+        .quotes-scroll-container { display: flex; flex-direction: column; gap: 12px; }
+        .quote-item { background: rgba(255, 245, 248, 0.85); border: 1px dashed #ffb6d9; padding: 15px; border-radius: 12px; }
+        .quote-text { font-size: 13.5px; color: #333; line-height: 1.6; font-style: italic; }
+
+        /* Nicknames */
+        .nickname-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px; }
+        .nickname-grid div { background: rgba(255, 240, 245, 0.85); padding: 10px; border-radius: 12px; font-size: 12px; text-align: center; color: #d946ef; font-weight: 600; border: 1px dashed #ff4b91; }
+
+        /* Chat Engine & Optimized Scroller */
+        .status-header { background: rgba(255, 245, 248, 0.8); padding: 12px; border-radius: 15px; border: 1px dashed #ffb6d9; margin-bottom: 12px; }
+        .profiles-row { display: flex; justify-content: space-between; gap: 10px; }
+        .user-card-mini { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 15px; width: 49%; cursor: pointer; margin-bottom: 0 !important; }
+        .user-card-mini img { width: 36px; height: 36px; border-radius: 50%; object-fit: cover; border: 1.5px solid #ff4b91; }
+        .user-info-text { display: flex; flex-direction: column; font-size: 11px; }
+        .profile-name-lbl { font-weight: bold; color: #ff4b91; }
+        .indicator-txt { font-size: 9px; font-weight: bold; margin-top: 2px; display: flex; align-items: center; gap: 4px; }
+        .seen-txt { font-size: 8px; color: #777; font-style: italic; }
+        .online-dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; display: inline-block; }
+        .offline-dot { width: 7px; height: 7px; background: #9ca3af; border-radius: 50%; display: inline-block; }
+        .header-actions { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+        .pop-trigger-btn { background: #ffe4f2; color: #ff4b91; border: 1px solid #ffb6d9; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: bold; cursor: pointer; }
+
+        /* OPTIMIZED CHAT BOX AND SCROLLBAR */
+        .chat-box { 
+            height: 380px; 
+            overflow-y: scroll;
+            overflow-x: hidden; 
+            border: 1px solid #ffb6d9; 
+            border-radius: 15px; 
+            padding: 15px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 10px; 
+        }
+        .chat-box::-webkit-scrollbar { width: 6px; }
+        .chat-box::-webkit-scrollbar-track { background: rgba(255, 238, 245, 0.5); border-radius: 10px; }
+        .chat-box::-webkit-scrollbar-thumb { background: #ff4b91; border-radius: 10px; }
+        body.dark-mode .chat-box::-webkit-scrollbar-track { background: rgba(25, 10, 30, 0.5); }
+        body.dark-mode .chat-box::-webkit-scrollbar-thumb { background: #d946ef; }
+
+        .msg { max-width: 78%; padding: 10px 14px; border-radius: 16px; font-size: 13.5px; line-height: 1.4; word-break: break-word; }
+        .msg.me { background: #ff4b91; color: white; align-self: flex-end; border-bottom-right-radius: 2px; }
+        .msg.you { background: rgba(241, 243, 245, 0.9); color: #222; align-self: flex-start; border-bottom-left-radius: 2px; }
+
+        /* MOBILE OPTIMIZED CHAT BAR & SEND BUTTON */
+        .bar { display: flex; gap: 8px; margin-top: 12px; align-items: center; width: 100%; }
+        .bar input { flex: 1; padding: 12px 18px; border-radius: 30px; border: 1px solid #ffb6d9; outline: none; font-size: 13.5px; min-width: 0; }
+        .send-love-btn { padding: 12px 22px; background: #ff4b91; color: white; border: none; border-radius: 30px; cursor: pointer; font-weight: bold; font-size: 14px; flex-shrink: 0; white-space: nowrap; transition: transform 0.2s; }
+        .send-love-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 75, 145, 0.4); }
+
+        @media (max-width: 600px) {
+            .bar { gap: 6px; }
+            .bar input { padding: 10px 14px; font-size: 13px; }
+            .send-love-btn { padding: 10px 16px; font-size: 13px; }
+        }
+
+        .typing-indicator { font-size: 12px; color: #d946ef; font-style: italic; padding: 4px 10px; min-height: 20px; }
+
+        /* Timeline */
+        .timeline { border-left: 3px solid #ff4b91; padding-left: 20px; margin: 20px 10px; }
+        .node { position: relative; margin-bottom: 30px; }
+        .node::before { content: '❤️'; position: absolute; left: -31px; top: 15px; font-size: 12px; background: #ffeef5; border-radius: 50%; padding: 3px; border: 1px solid #ffb6d9; }
+        .time-lbl { font-size: 11px; color: white; background: #ff4b91; padding: 3px 10px; border-radius: 15px; display: inline-block; margin-bottom: 6px; font-weight: bold; }
+        .node h4 { font-size: 15px; margin-bottom: 4px; }
+        .node p { font-size: 13px; color: #555; }
+        .love-quote { font-style: italic; color: #ff4b91; font-weight: 600; font-size: 12px; display: block; margin-top: 5px; }
+
+        /* Announcements / Space Panels */
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; }
+        .tab-btn { flex: 1; padding: 12px; border-radius: 25px; border: 2px solid #ff4b91; background: rgba(255, 255, 255, 0.85); color: #ff4b91; font-weight: bold; cursor: pointer; font-size: 13px; flex-shrink: 0; }
+        .tab-btn.active { background: #ff4b91; color: white; }
+        .bday-wrapper { color: #333; line-height: 1.7; position: relative; }
+        .bday-wrapper h3 { font-size: 24px; color: #ff4b91; text-align: center; margin-bottom: 5px; font-family: 'Great Vibes', cursive; }
+        .bday-subtitle { text-align: center; font-size: 13px; color: #d946ef; font-style: italic; margin-bottom: 25px; font-weight: 600; }
+        .svg-header-icon { text-align: center; margin-bottom: 10px; }
+        .svg-header-icon svg { width: 50px; height: 50px; filter: drop-shadow(0px 3px 3px rgba(255, 75, 145, 0.2)); }
+        .story-section { margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px dashed #ffb6d9; }
+        .story-section h4 { font-size: 16px; color: #ff4b91; margin-bottom: 10px; border-left: 3px solid #ff4b91; padding-left: 8px; }
+        .story-section p { font-size: 13.5px; text-align: justify; margin-bottom: 10px; }
+        .highlight-quote { background: rgba(255, 245, 248, 0.85); border: 1px dashed #ff4b91; padding: 15px; border-radius: 12px; margin: 15px 0; font-style: italic; text-align: center; font-size: 14px; color: #ff4b91; font-weight: 600; }
+        .heart-divider { text-align: center; margin: 15px 0; color: #ff4b91; font-size: 18px; letter-spacing: 5px; }
+
+        /* Gallery Layout */
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(90px, 1fr)); gap: 8px; margin-top: 15px; }
+        .gallery-img { width: 100%; height: 90px; object-fit: cover; border-radius: 10px; border: 2px solid #ffb6d9; cursor: pointer; background: #fff5f8; }
+        .gallery-img:hover { transform: scale(1.05); border-color: #ff4b91; }
+
+        /* Profiles */
+        .container-grid-two { display: grid; grid-template-columns: 1fr; gap: 20px; }
+        .row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid rgba(255, 238, 245, 0.6); font-size: 13px; }
+        .lbl { font-weight: 600; color: #ff4b91; }
+        .val { color: #333; font-weight: 500; text-align: right; max-width: 65%; }
+        .secure-badge { background: #ffe4f2; color: #d946ef; padding: 4px 12px; border-radius: 15px; font-size: 11px; font-weight: bold; display: inline-block; }
+
+        /* Footer */
+        footer { background: #ff4b91; color: white; text-align: center; padding: 18px 10px; margin-top: auto; font-size: 13px; font-weight: bold; border-top: 1px solid #ffb6d9; position: relative; z-index: 100; }
+
+        @media (min-width: 769px) {
+            .container-grid-two { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
 </head>
 
 <body>
 
-    <!-- GLOBAL FLOATING EMOJIS BACKGROUND (Visible on all pages) -->
+    <!-- DARK / LIGHT MODE TOGGLE BUTTON -->
+    <button id="themeToggleBtn" onclick="toggleTheme()" class="theme-toggle-btn" title="Toggle Dark/Light Mode">🌙</button>
+
+    <!-- FLOATING BACKGROUND MUSIC PLAYER -->
+    <audio id="bgMusicTrack" loop src="https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=romantic-piano-112199.mp3"></audio>
+    <button id="musicToggleBtn" onclick="toggleAudioPlay()" class="music-float-btn" title="Play/Pause Background Romantic Tune">🎵</button>
+
+    <!-- GLOBAL FLOATING EMOJIS BACKGROUND -->
     <div class="floating-hearts-bg">
         <div class="f-heart">❤️</div>
         <div class="f-heart">💖</div>
@@ -64,15 +522,8 @@
         <!-- ================= VIEW 0: LANDING ================= -->
         <section id="view-landing" class="view-active text-center">
 
-            <!-- Top Header Outside Container with 3x Size & Infinity SVG -->
             <div class="landing-top-header">
-                <h2 class="universe-title">Welcome to Our Universe
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 32" fill="none" stroke="#d946ef"
-                        stroke-width="5" stroke-linecap="round" stroke-linejoin="round" class="infinity-icon">
-                        <path
-                            d="M18 4a12 12 0 1 0 0 24c8 0 14-12 14-12s6-12 14-12a12 12 0 1 1 0 24c-8 0-14-12-14-12S26 4 18 4z" />
-                    </svg>
-                </h2>
+                <h2 class="universe-title">Welcome to Our Universe</h2>
             </div>
 
             <div class="hero-card">
@@ -86,33 +537,55 @@
         <!-- ================= VIEW 1: HOME ================= -->
         <section id="view-home" class="view-hidden">
             <div class="romantic-card text-center">
-                <h2 class="title" style="font-family:'Great Vibes', cursive; font-size:42px;">Welcome Home, My Lifeline
-                    ✨</h2>
-                <p style="font-style: italic; color: #555;">"Future plans mein bas tum hi tum ho... Saath mein har pal
-                    celebrate karna hai"</p>
+                <h2 class="title" style="font-family:'Great Vibes', cursive; font-size:42px; color:#ff4b91;">Welcome Home, My Lifeline ✨</h2>
+                <p style="font-style: italic;" class="quote-text">"Future plans mein bas tum hi tum ho... Saath mein har pal celebrate karna hai"</p>
             </div>
 
             <div class="romantic-card">
-                <h3
-                    style="color:#ff4b91; font-size:18px; border-left:4px solid #ff4b91; padding-left:10px; margin-bottom:15px;">
+                <h3 style="color:#ff4b91; font-size:18px; border-left:4px solid #ff4b91; padding-left:10px; margin-bottom:15px;">
                     ✨ Pure Love & Lifetime Support Whispers</h3>
                 <div class="quotes-scroll-container">
                     <div class="quote-item">
-                        <p class="quote-text">"Shubhi, tumhaari masoomiyat aur tumhaari baatein meri zindagi ka wo
-                            sukoon hain jo mujhe poori duniya me kahin nahi mil sakta. Humara sath kismat ne tay kiya
-                            hai."</p>
+                        <p class="quote-text">"Shubhi, tumhaari masoomiyat aur tumhaari baatein meri zindagi ka wo sukoon hain jo mujhe poori duniya me kahin nahi mil sakta. Humara sath kismat ne tay kiya hai."</p>
                     </div>
                     <div class="quote-item">
-                        <p class="quote-text">"Zindagi me chahe koi bhi mod aaye, mushkilein kitni bhi badi hon, hamesha
-                            yaad rakhna ki mera haath tumhaare haath me rahega. Ek doosre ke support se hum har sapna
-                            sach karenge."</p>
+                        <p class="quote-text">"Zindagi me chahe koi bhi mod aaye, mushkilein kitni bhi badi hon, hamesha yaad rakhna ki mera haath tumhaare haath me rahega. Ek doosre ke support se hum har sapna sach karenge."</p>
                     </div>
                     <div class="quote-item">
-                        <p class="quote-text">"Telegram ka wo pehli mulaqat ka click ek ittefaq ho sakta hai, par tumse
-                            har din bepannah pyaar karna meri rooh ka faisla hai. Tum meri dosti bhi ho aur aakhri pyaar
-                            bhi."</p>
+                        <p class="quote-text">"Telegram ka wo pehli mulaqat ka click ek ittefaq ho sakta hai, par tumse har din bepannah pyaar karna meri rooh ka faisla hai. Tum meri dosti bhi ho aur aakhri pyaar bhi."</p>
                     </div>
                 </div>
+            </div>
+
+            <!-- 1. LOVE DAY COUNTER -->
+            <div class="romantic-card text-center">
+                <h3 style="color:#ff4b91; font-size:18px; margin-bottom:5px;">⏳ Love Day Counter</h3>
+                <p style="font-size:12px; font-style:italic;" class="quote-text">29 Oct (4:00 PM Evening) Se Humare Saath Hone Ka Sunder Safar ❤️</p>
+                <div class="counter-grid">
+                    <div class="counter-box">
+                        <div class="counter-num" id="cntDays">0</div>
+                        <div class="counter-lbl">Days</div>
+                    </div>
+                    <div class="counter-box">
+                        <div class="counter-num" id="cntHours">0</div>
+                        <div class="counter-lbl">Hours</div>
+                    </div>
+                    <div class="counter-box">
+                        <div class="counter-num" id="cntMins">0</div>
+                        <div class="counter-lbl">Minutes</div>
+                    </div>
+                    <div class="counter-box">
+                        <div class="counter-num" id="cntSecs">0</div>
+                        <div class="counter-lbl">Seconds</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2. DAILY LOVE JAR -->
+            <div class="romantic-card text-center">
+                <h3 style="color:#ff4b91; font-size:18px; margin-bottom:8px;">🏺 Daily Love Jar (Surprise Notes)</h3>
+                <p style="font-size:12.5px; font-style:italic; margin-bottom:15px;" class="quote-text">Jar kholne par 6 cute romantic notes ek ke baad ek "Next" click karke dekhein ✨</p>
+                <button onclick="openLoveJarModal()" class="action-glow-btn">Open Love Jar Notes 💌</button>
             </div>
 
             <div class="romantic-card">
@@ -125,54 +598,49 @@
         <section id="view-chat" class="view-hidden">
             <div class="romantic-card">
                 <div class="header-actions">
-                    <div id="sessionLabel" style="font-weight:600; color:#333; font-size:14px;">👤 Loading User...</div>
+                    <div id="sessionLabel" style="font-weight:600; font-size:14px;">👤 Loading User...</div>
                     <button class="pop-trigger-btn" onclick="openProfileEditModal()">✏️ Edit Profile</button>
                 </div>
 
                 <div class="status-header">
                     <div class="profiles-row">
                         <div class="user-card-mini" id="card-Sachin" onclick="inspectUserBio('Sachin')">
-                            <img id="headDp-Sachin" src="sachin.webp" alt="S"
-                                onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Sachin'">
+                            <img id="headDp-Sachin" src="sachin.webp" alt="S" onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Sachin'">
                             <div class="user-info-text">
                                 <span class="profile-name-lbl" id="headName-Sachin">Sachin</span>
-                                <div class="indicator-txt" id="stateLabel-Sachin"><span
-                                        class="offline-dot"></span>Offline</div>
+                                <div class="indicator-txt" id="stateLabel-Sachin"><span class="offline-dot"></span>Offline</div>
                                 <div class="seen-txt" id="seenLabel-Sachin"></div>
                             </div>
                         </div>
                         <div class="user-card-mini" id="card-Shubhi" onclick="inspectUserBio('Shubhi')">
-                            <img id="headDp-Shubhi" src="shubhi.webp" alt="S"
-                                onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Shubhi'">
+                            <img id="headDp-Shubhi" src="shubhi.webp" alt="S" onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Shubhi'">
                             <div class="user-info-text">
                                 <span class="profile-name-lbl" id="headName-Shubhi">Shubhi</span>
-                                <div class="indicator-txt" id="stateLabel-Shubhi"><span
-                                        class="offline-dot"></span>Offline</div>
+                                <div class="indicator-txt" id="stateLabel-Shubhi"><span class="offline-dot"></span>Offline</div>
                                 <div class="seen-txt" id="seenLabel-Shubhi"></div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- CHAT CONTAINER -->
                 <div class="chat-box" id="scroller"></div>
                 <div class="typing-indicator" id="typingTag"></div>
 
-<div class="chat-container">
-<div id="scroller"></div>
-<div class="bar">
-    <input type="text" id="msgText" placeholder="Type a message...">
-    <button onclick="dispatch()" class="send-love-btn">Send ❤️</button>
-</div>
-</div>
+                <div class="chat-container">
+                    <div class="bar">
+                        <input type="text" id="msgText" placeholder="Type a message..." onkeypress="if(event.key==='Enter') dispatch()" oninput="handleTyping()">
+                        <button onclick="dispatch()" class="send-love-btn">Send ❤️</button>
+                    </div>
+                </div>
             </div>
         </section>
 
         <!-- ================= VIEW 3: TIMELINE ================= -->
         <section id="view-moments" class="view-hidden">
-            <div class="romantic-card text-center" style="background: linear-gradient(to bottom, #ffffff, #fff5f8);">
-                <h2 class="title" style="font-family:'Great Vibes', cursive; font-size:42px;">Tere Hi Sapne 💍</h2>
-                <p style="font-style: italic; color: #666;">"Humari kahani ka har ek pal, mere dil me hamesha ke liye
-                    mahfooz hai bebu..."</p>
+            <div class="romantic-card text-center">
+                <h2 class="title" style="font-family:'Great Vibes', cursive; font-size:42px; color:#ff4b91;">Tere Hi Sapne 💍</h2>
+                <p style="font-style: italic;" class="quote-text">"Humari kahani ka har ek pal, mere dil me hamesha ke liye mahfooz hai bebu..."</p>
             </div>
             <div class="timeline" id="timelineContainer"></div>
         </section>
@@ -184,7 +652,7 @@
                 <button class="tab-btn" id="tabBtn-pr" onclick="switchSpaceTab('pr')">🌹 Propose Space</button>
             </div>
 
-            <!-- Birthday Space HTML Restored Perfectly -->
+            <!-- Birthday Space -->
             <div id="tab-bd" class="panel text-view" style="display:block;">
                 <div class="bday-wrapper">
                     <div class="svg-header-icon">
@@ -201,82 +669,42 @@
                     </div>
 
                     <h3>Happy Birthday, My Precious Shubhi! 🎂✨</h3>
-                    <div class="bday-subtitle">A Journey from a Telegram Study Group to the Deepest Corners of My Heart
-                        ❤️</div>
+                    <div class="bday-subtitle">A Journey from a Telegram Study Group to the Deepest Corners of My Heart ❤️</div>
 
                     <div class="story-section">
                         <h4>✨ Chapter 1: Telegram Par Wo Pehli Mulaqat... 📖</h4>
-                        <p>Shubhi, aaj tumhaare janamdin ke is behad khaas aur paavan mauke par, main apne dil ke saare
-                            darwaaje khol kar tumse apne dil ki baat kehna chahta hoon. Mera dil sach mein bohot zyada
-                            bhara hua hai kyunki kaash tum dekh paati ki tum mere liye kya mayne rakhti ho. Sab kuch
-                            kitna aam shuru hua tha na? Ek chhota sa Telegram study group, jahan hum sirf padhai ke
-                            silsile mein mile the. Mujhe aaj bhi yaad hai wo shuruwaati din jab hamari baatein sirf
-                            padhai aur career ko lekar hua karti thi. Lekin kehte hain na ki jab kismat ko do dilon ko
-                            jodna hota hai, toh wo sabse anokhe raste chunti hai. Wo study group hamare liye sirf ek
-                            jariya tha, asli maksad toh hum dono ka ek doosre ke kareeb aana tha.✍️</p>
-                        <p>Us shuruwaati daur mein, jab hum dosto ki tarah baatein karte the, tabhi se mere dil mein
-                            tumhaare liye ek bohot hi alag aur izzat wali jagah banne lagi thi. Tumhari baatein, tumhara
-                            har ek cheez ko dekhne ka tarika, aur tumhari masoomiyat mujhe dheere-dheere tumhari taraf
-                            kheench rahi thi. Tumhe lagta hoga ki main bas ek casual friend tha, par sach toh ye hai ki
-                            main tumhaari har choti baat ko note karta tha. Mujhe tumhaara sath itna pasand aane laga
-                            tha ki main har waqt bas isi intezar mein rehta tha ki kab tumhara koi message aaye. Dosti
-                            ka wo daur hamari foundation tha, jahan humne ek doosre ko samjha aur jana. 🌸💬</p>
+                        <p>Shubhi, aaj tumhaare janamdin ke is behad khaas aur paavan mauke par, main apne dil ke saare darwaaje khol kar tumse apne dil ki baat kehna chahta hoon. Mera dil sach mein bohot zyada bhara hua hai kyunki kaash tum dekh paati ki tum mere liye kya mayne rakhti ho. Sab kuch kitna aam shuru hua tha na? Ek chhota sa Telegram study group, jahan hum sirf padhai ke silsile mein mile the. Mujhe aaj bhi yaad hai wo shuruwaati din jab hamari baatein sirf padhai aur career ko lekar hua karti thi. Lekin kehte hain na ki jab kismat ko do dilon ko jodna hota hai, toh wo sabse anokhe raste chunti hai. Wo study group hamare liye sirf ek jariya tha, asli maksad toh hum dono ka ek doosre ke kareeb aana tha.✍️</p>
+                        <p>Us shuruwaati daur mein, jab hum dosto ki tarah baatein karte the, tabhi se mere dil mein tumhaare liye ek bohot hi alag aur izzat wali jagah banne lagi thi. Tumhari baatein, tumhara har ek cheez ko dekhne ka tarika, aur tumhari masoomiyat mujhe dheere-dheere tumhari taraf kheench rahi thi. Tumhe lagta hoga ki main bas ek casual friend tha, par sach toh ye hai ki main tumhaari har choti baat ko note karta tha. Mujhe tumhaara sath itna pasand aane laga tha ki main har waqt bas isi intezar mein rehta tha ki kab tumhara koi message aaye. Dosti ka wo daur hamari foundation tha, jahan humne ek doosre ko samjha aur jana. 🌸💬</p>
                     </div>
 
                     <div class="heart-divider">❤️❤️❤️</div>
 
                     <div class="story-section">
                         <h4>🤝 Chapter 2: Wo Waqt Jab Dil Ne Dil Ko Pehchana... ⏳</h4>
-                        <p>Waqt bit-ta gaya aur jaise-jaise humne ek sath zyada waqt guzarna shuru kiya, mujhe ehsaas
-                            hua ki tum mere liye sirf ek acchi dost nahi ho, balki tum meri zindagi ka wo hissa ban
-                            chuki ho jiske bina main adhoora hoon. Main shuru se hi tumhaare sath bohot sincere tha.
-                            Maine kabhi bhi hamare rishte ko kisi mazaak ya choti baat ki tarah nahi liya. Mere dil mein
-                            tumhaare liye jo feelings thin, wo ekdum pakki aur sachi thin. Jab hum dono ne ek doosre ke
-                            sath dher saari baatein share keen, apne dukh-sukh baante, tab mujhe tumhaari zindagi ke
-                            baare mein aur tumhein meri zindagi ke baare mein bohot kuch pata chala. 🥰🌻</p>
-                        <p>Ek sath waqt bitane ka sabse khoobsurat fayda ye hua ki hum dono ek doosre ki aadat ban gaye.
-                            Main jab bhi tumse baat karta tha, mujhe ek alag hi sukoon milta tha. Maine mehsoos kiya ki
-                            tumhari har baat mein ek sachai hai jo aaj ki duniya mein milna bohot mushkil hai. Hum dono
-                            ne padhai ke sath-sath zindagi ke har pehlu par baat ki, aur har beet te din ke sath hamari
-                            understanding itni solid ho gayi ki hum bina kahe bhi ek doosre ke mood ko samajhne lage. Wo
-                            waqt bohot anmol tha, jisne mujhe ye yakeen dilaya ki tum hi wo ladki ho jiske sath main
-                            apni poori zindagi bitana chahta hoon. 🔗❤️</p>
+                        <p>Waqt bit-ta gaya aur jaise-jaise humne ek sath zyada waqt guzarna shuru kiya, mujhe ehsaas hua ki tum mere liye sirf ek acchi dost nahi ho, balki tum meri zindagi ka wo hissa ban chuki ho jiske bina main adhoora hoon. Main shuru se hi tumhaare sath bohot sincere tha. Maine kabhi bhi hamare rishte ko kisi mazaak ya choti baat ki tarah nahi liya. Mere dil mein tumhaare liye jo feelings thin, wo ekdum pakki aur sachi thin. Jab hum dono ne ek doosre ke sath dher saari baatein share keen, apne dukh-sukh baante, tab mujhe tumhaari zindagi ke baare mein aur tumhein meri zindagi ke baare mein bohot kuch pata chala. 🥰🌻</p>
+                        <p>Ek sath waqt bitane ka sabse khoobsurat fayda ye hua ki hum dono ek doosre ki aadat ban gaye. Main jab bhi tumse baat karta tha, mujhe ek alag hi sukoon milta tha. Maine mehsoos kiya ki tumhari har baat mein ek sachai hai jo aaj ki duniya mein milna bohot mushkil hai. Hum dono ne padhai ke sath-sath zindagi ke har pehlu par baat ki, aur har beet te din ke sath hamari understanding itni solid ho gayi ki hum bina kahe bhi ek doosre ke mood ko samajhne lage. Wo waqt bohot anmol tha, jisne mujhe ye yakeen dilaya ki tum hi wo ladki ho jiske sath main apni poori zindagi bitana chahta hoon. 🔗❤️</p>
                     </div>
 
                     <div class="highlight-quote">
-                        "Telegram ke study group se shuru hua safar, ab meri har ek saans ka hissa ban chuka hai.
-                        Shubhi, tum meri dosti bhi ho aur mera pehla aur aakhri pyaar bhi! 🥰🦚"
+                        "Telegram ke study group se shuru hua safar, ab meri har ek saans ka hissa ban chuka hai. Shubhi, tum meri dosti bhi ho aur mera pehla aur aakhri pyaar bhi! 🥰🦚"
                     </div>
 
                     <div class="story-section">
                         <h4>🎉 Chapter 3: Lifetime Vows & Celebrations... ♾️</h4>
-                        <p>Mera har ek lamha, meri har ek koshish aur mera har ek sapna ab tumse shuru hokar tumhi par
-                            khatam hota hai. Maine aaj tumhaare is birthday ko special banane ke liye bhale hi bohot
-                            kuch kiya ho, lekin sach toh ye hai ki tumne meri zindagi mein aakar meri poori life ko hi
-                            ek celebration bana diya hai. Main tumse vaada karta hoon ki chahe zindagi mein koi bhi mod
-                            aaye, main humesha tumhaare sath utni hi sincerity aur imaandari ke sath khada rahunga jaise
-                            main Telegram group par hamari pehli baat ke waqt tha. Tumhaari khushi meri sabse badi
-                            priority hai, aur tumhaari muskaan meri duniya ki sabse pyari cheez hai. 😊💕</p>
-                        <p>Aaj tumhaare is janamdin par main bhagwan se bas yahi dua karta hoon ki tumhaare chehre par
-                            ye happiness humesha bani rahe. Hum dono ka ye sath jo dosti se shuru hokar pyaar tak
-                            pahuncha hai, wo shadi aur ek khoobsurat parivar tak jaye. Humesha yaad rakhna Shubhi,
-                            tumhaara ye partner tumse bepannah aur behad sacha pyaar karta hai. Tumhaare is din ko dher
-                            saare cake, balloons, aur hamari pyari yaadon ke sath main bohot zyada special banana chahta
-                            hoon. Happy Birthday once again, my heartbeat, my wifey, my everything! 🎂🥳👑💖</p>
+                        <p>Mera har ek lamha, meri har ek koshish aur mera har ek sapna ab tumse shuru hokar tumhi par khatam hota hai. Maine aaj tumhaare is birthday ko special banane ke liye bhale hi bohot kuch kiya ho, lekin sach toh ye hai ki tumne meri zindagi mein aakar meri poori life ko hi ek celebration bana diya hai. Main tumse vaada karta hoon ki chahe zindagi mein koi bhi mod aaye, main humesha tumhaare sath utni hi sincerity aur imaandari ke sath khada rahunga jaise main Telegram group par hamari pehli baat ke waqt tha. Tumhaari khushi meri sabse badi priority hai, aur tumhaari muskaan meri duniya ki sabse pyari cheez hai. 😊💕</p>
+                        <p>Aaj tumhaare is janamdin par main bhagwan se bas yahi dua karta hoon ki tumhaare chehre par ye happiness humesha bani rahe. Hum dono ka ye sath jo dosti se shuru hokar pyaar tak pahuncha hai, wo shadi aur ek khoobsurat parivar tak jaye. Humesha yaad rakhna Shubhi, tumhaara ye partner tumse bepannah aur behad sacha pyaar karta hai. Tumhaare is din ko dher saare cake, balloons, aur hamari pyari yaadon ke sath main bohot zyada special banana chahta hoon. Happy Birthday once again, my heartbeat, my wifey, my everything! 🎂🥳👑💖</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Propose Space HTML Restored Perfectly -->
+            <!-- Propose Space -->
             <div id="tab-pr" class="panel text-view" style="display:none;">
                 <div class="bday-wrapper">
                     <div class="svg-header-icon">
                         <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
                             <circle cx="50" cy="45" r="18" fill="none" stroke="#ffd700" stroke-width="4" />
                             <rect x="45" y="20" width="10" height="10" fill="#b0e0e6" transform="rotate(45 50 25)" />
-                            <path
-                                d="M50 40 C45 30, 35 30, 35 42 C35 52, 50 65, 50 65 C50 65, 65 52, 65 42 C65 30, 55 30, 50 40 Z"
-                                fill="#ff4b91" />
+                            <path d="M50 40 C45 30, 35 30, 35 42 C35 52, 50 65, 50 65 C50 65, 65 52, 65 42 C65 30, 55 30, 50 40 Z" fill="#ff4b91" />
                         </svg>
                     </div>
 
@@ -285,25 +713,13 @@
 
                     <div class="story-section">
                         <h4>🌹 The Golden Declaration - 24 December Ka Ikraar... 🏹</h4>
-                        <p>Shubhi, sach bataun toh main tumhein bohot pehle se hi pasand karta tha. Jab hum Telegram
-                            group par mile the aur dheere-dheere hamari dosti gehri ho rahi thi, tabhi se mere dil ne
-                            tumhein apna sab kuch maan liya tha. Mere dil mein tumhaare liye pyaar ka samandar bohot
-                            pehle hi umad chuka tha, lekin main bas us sahi, anmol lamhe ka intezar kar raha tha jahan
-                            main tumhein bata sakoon ki tum mere liye kya ho. 24 December ka wo din hamari zindagi ka
-                            sabsé bada aur sunhera din bana jab maine apni saari jhijhak aur darr ko chhodkar poori
-                            sincerity aur sachai ke sath tumhaare samne apne dil ka haal rakh diya tha.</p>
+                        <p>Shubhi, sach bataun toh main tumhein bohot pehle se hi pasand karta tha. Jab hum Telegram group par mile the aur dheere-dheere hamari dosti gehri ho rahi thi, tabhi se mere dil ne tumhein apna sab kuch maan liya tha. Mere dil mein tumhaare liye pyaar ka samandar bohot pehle hi umad chuka tha, lekin main bas us sahi, anmol lamhe ka intezar kar raha tha jahan main tumhein bata sakoon ki tum mere liye kya ho. 24 December ka wo din hamari zindagi ka sabsé bada aur sunhera din bana jab maine apni saari jhijhak aur darr ko chhodkar poori sincerity aur sachai ke sath tumhaare samne apne dil ka haal rakh diya tha.</p>
 
                         <div class="highlight-quote">
-                            "Telegram ke study group se shuru hua safar, ab meri har ek saans ka hissa ban chuka hai.
-                            Shubhi, tum meri dosti bhi ho aur mera pehla aur aakhri pyaar bhi! 🥰🦚"
+                            "Ek sacha pyaar kabhi waqt aur halaat ka mohtaj nahi hota. Mere dil ki har dhadkan me hamesha sirf aur sirf tumhara naam rahega bebu!" ❤️
                         </div>
 
-                        <p>Wo pal jab maine tumse apne pyaar ka ikraar kiya, meri dhadkanein bohot tez thin. Maine
-                            hamesha hamare rishte ko bohot sanjeedgi se liya tha aur us din tumhaare 'Haan' kehne ne
-                            meri zindagi ko badal kar rakh diya. Wo dosti ka safar jo study group se shuru hua tha, us
-                            din ek bepannah sachhe pyaar ke bandhan mein badal gaya. Future plans mein ab sirf aur sirf
-                            hamara ek sath hona hi target hai. Will you lock paths with me forever and be mine for
-                            eternity? ❤️💍</p>
+                        <p>Wo pal jab maine tumse apne pyaar ka ikraar kiya, meri dhadkanein bohot tez thin. Maine hamesha hamare rishte ko bohot sanjeedgi se liya tha aur us din tumhaare 'Haan' kehne ne meri zindagi ko badal kar rakh diya. Wo dosti ka safar jo study group se shuru hua tha, us din ek bepannah sachhe pyaar ke bandhan mein badal gaya. Future plans mein ab sirf aur sirf hamara ek sath hona hi target hai. Will you lock paths with me forever and be mine for eternity? ❤️💍</p>
                     </div>
                 </div>
             </div>
@@ -313,8 +729,7 @@
         <section id="view-gallery" class="view-hidden">
             <div class="romantic-card text-center">
                 <h2 class="title" style="color:#ff4b91; font-size:24px;">📸 Our Memories Bank</h2>
-                <p style="font-style:italic; color:#666; font-size:13px;">A beautiful collection of 56 memories
-                    capturing our eternity.</p>
+                <p style="font-style:italic; font-size:13px;" class="quote-text">A beautiful collection of 56 memories capturing our eternity.</p>
                 <div class="gallery-grid" id="galleryContainer"></div>
             </div>
         </section>
@@ -324,9 +739,7 @@
             <div class="container-grid-two">
                 <div class="romantic-card">
                     <div style="text-align:center; margin-bottom: 20px;">
-                        <img src="shubhi.webp"
-                            onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Shubhi'"
-                            style="width:70px; height:70px; border-radius:50%; border:2px solid #ff4b91; object-fit: cover;">
+                        <img src="shubhi.webp" onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Shubhi'" style="width:70px; height:70px; border-radius:50%; border:2px solid #ff4b91; object-fit: cover;">
                         <h3 style="color:#ff4b91; margin-top:5px;">Shubhi Singh 🥰</h3>
                         <div class="secure-badge">🛡️ Encrypted Profile Stack</div>
                     </div>
@@ -334,9 +747,7 @@
                 </div>
                 <div class="romantic-card">
                     <div style="text-align:center; margin-bottom: 20px;">
-                        <img src="sachin.webp"
-                            onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Sachin'"
-                            style="width:70px; height:70px; border-radius:50%; border:2px solid #ff4b91; object-fit: cover;">
+                        <img src="sachin.webp" onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Sachin'" style="width:70px; height:70px; border-radius:50%; border:2px solid #ff4b91; object-fit: cover;">
                         <h3 style="color:#ff4b91; margin-top:5px;">Sachin Meena 🥰</h3>
                         <div class="secure-badge">🛡️ Encrypted Profile Stack</div>
                     </div>
@@ -350,8 +761,7 @@
     <!-- ================= MODALS ================= -->
     <div class="modal-overlay" id="loginModal">
         <div class="modal-card">
-            <h2 style="color:#ff4b91; font-family:'Great Vibes', cursive; font-size:36px; margin-bottom:15px;">Sachin ❤️
-                Shubhi</h2>
+            <h2 style="color:#ff4b91; font-family:'Great Vibes', cursive; font-size:36px; margin-bottom:15px;">Sachin ❤️ Shubhi</h2>
             <input type="text" id="uid" placeholder="Enter Your Love ID..." class="login-input">
             <input type="password" id="pwd" placeholder="Enter Password..." class="login-input">
             <button onclick="handleLogin()" class="login-btn">Enter Our World 💖</button>
@@ -360,18 +770,32 @@
         </div>
     </div>
 
+    <!-- DAILY LOVE JAR SURPRISE NOTE POP-UP MODAL -->
+    <div class="modal-overlay" id="loveJarModal">
+        <div class="modal-card">
+            <div style="font-size:40px; margin-bottom:5px;">🏺✨</div>
+            <h3 style="color:#ff4b91; margin-bottom:4px;">Daily Love Jar Notes</h3>
+            <span id="jarCounter" style="font-size:11px; color:#d946ef; font-weight:bold;">Note 1 of 6</span>
+            <div class="love-jar-box">
+                <p id="loveJarText" style="font-size:13.5px; color:#333; font-style:italic; font-weight:600; line-height:1.5;">Note loading...</p>
+            </div>
+            <div style="display:flex; gap:10px;">
+                <button onclick="nextLoveJarQuote()" style="flex:1; padding:10px; background:#d946ef; color:white; border:none; border-radius:15px; font-weight:bold; cursor:pointer;">Next Note ➡️</button>
+                <button onclick="closeModal('loveJarModal')" style="flex:1; padding:10px; background:#ff4b91; color:white; border:none; border-radius:15px; font-weight:bold; cursor:pointer;">Close Jar ❤️</button>
+            </div>
+        </div>
+    </div>
+
     <div class="modal-overlay" id="profileEditModal">
         <div class="modal-card">
             <h3 style="color:#ff4b91; margin-bottom:15px;">Update Profile Setting</h3>
             <div style="text-align:left; margin-bottom:10px;">
                 <label style="font-size:12px; font-weight:bold; color:#555;">📝 Love Bio / Note:</label>
-                <input type="text" id="modalBioInput" placeholder="Enter love message..."
-                    style="width:100%; padding:10px; border-radius:10px; border:1px solid #ffb6d9; outline:none; margin-top:5px;">
+                <input type="text" id="modalBioInput" placeholder="Enter love message..." style="width:100%; padding:10px; border-radius:10px; border:1px solid #ffb6d9; outline:none; margin-top:5px;">
             </div>
             <div style="text-align:left; margin-bottom:15px;">
                 <label style="font-size:12px; font-weight:bold; color:#555;">🎭 Current Live Mood:</label>
-                <select id="modalMoodSelect"
-                    style="width:100%; padding:10px; border-radius:10px; border:1px solid #ffb6d9; outline:none; margin-top:5px;">
+                <select id="modalMoodSelect" style="width:100%; padding:10px; border-radius:10px; border:1px solid #ffb6d9; outline:none; margin-top:5px;">
                     <option value="🥰 Happy & Loving">🥰 Happy & Loving</option>
                     <option value="🥺 Missing You">🥺 Missing You</option>
                     <option value="🔥 Romantic Mode">🔥 Romantic Mode</option>
@@ -380,52 +804,462 @@
                 </select>
             </div>
             <div style="display:flex; gap:10px;">
-                <button onclick="closeModal('profileEditModal')"
-                    style="flex:1; padding:10px; border-radius:10px; border:none; background:#eee; cursor:pointer; font-weight:bold;">Cancel</button>
-                <button onclick="saveProfileChanges()"
-                    style="flex:1; padding:10px; border-radius:10px; border:none; background:#ff4b91; color:white; cursor:pointer; font-weight:bold;">Save
-                    ❤️</button>
+                <button onclick="closeModal('profileEditModal')" style="flex:1; padding:10px; border-radius:10px; border:none; background:#eee; cursor:pointer; font-weight:bold;">Cancel</button>
+                <button onclick="saveProfileChanges()" style="flex:1; padding:10px; border-radius:10px; border:none; background:#ff4b91; color:white; cursor:pointer; font-weight:bold;">Save ❤️</button>
             </div>
         </div>
     </div>
 
+    <!-- INSPECT PROFILE MODAL -->
     <div class="modal-overlay" id="inspectProfileModal">
         <div class="modal-card text-center">
-            <img id="inspectDp" src=""
-                style="width:80px; height:80px; border-radius:50%; border:2px solid #ff4b91; margin-bottom:10px; object-fit:cover;">
+            <img id="inspectDp" src="" style="width:80px; height:80px; border-radius:50%; border:2px solid #ff4b91; margin-bottom:10px; object-fit:cover;">
             <h3 id="inspectName" style="color:#ff4b91; margin-bottom:5px;">Name</h3>
-            <div id="inspectMood"
-                style="background:#fff0f5; color:#ff4b91; padding:4px 12px; border-radius:15px; font-size:12px; font-weight:bold; display:inline-block; margin-bottom:15px; border:1px solid #ffb6d9;">
-                Mood</div>
-            <div
-                style="text-align:left; background:#fdfbfd; padding:15px; border-radius:12px; border:1px solid #ffb6d9;">
-                <label style="font-size:11px; font-weight:bold; color:#888; text-transform:uppercase;">Love Bio /
-                    Note:</label>
+            <div id="inspectMood" class="inspect-mood-badge">Mood</div>
+            <div class="inspect-bio-box">
+                <label style="font-size:11px; font-weight:bold; color:#888; text-transform:uppercase;">Love Bio / Note:</label>
                 <p id="inspectBio" style="font-size:14px; color:#333; margin-top:5px; font-weight:500;">Bio...</p>
             </div>
-            <button onclick="closeModal('inspectProfileModal')"
-                style="width:100%; padding:12px; background:#ff4b91; color:white; border:none; border-radius:12px; font-weight:bold; margin-top:15px; cursor:pointer;">Close
-                Envelope 💌</button>
+            <button onclick="closeModal('inspectProfileModal')" style="width:100%; padding:12px; background:#ff4b91; color:white; border:none; border-radius:12px; font-weight:bold; margin-top:15px; cursor:pointer;">Close Envelope 💌</button>
         </div>
     </div>
 
     <!-- Lightbox -->
     <div class="modal-overlay" id="lightboxModal" style="background: rgba(0,0,0,0.9); backdrop-filter: blur(5px);">
-        <button onclick="closeModal('lightboxModal')"
-            style="position:absolute; top:20px; right:30px; font-size:30px; color:white; background:none; border:none; cursor:pointer;">✖</button>
-        <button onclick="changeLightbox(-1)"
-            style="position:absolute; top:50%; left:10px; font-size:40px; color:white; background:rgba(0,0,0,0.5); border:none; cursor:pointer; padding:10px 15px; border-radius:10px;">◀</button>
-        <img id="lightboxImg" src=""
-            style="max-width:90%; max-height:80%; border-radius:10px; border:2px solid #ff4b91; object-fit: contain;">
-        <button onclick="changeLightbox(1)"
-            style="position:absolute; top:50%; right:10px; font-size:40px; color:white; background:rgba(0,0,0,0.5); border:none; cursor:pointer; padding:10px 15px; border-radius:10px;">▶</button>
+        <button onclick="closeModal('lightboxModal')" style="position:absolute; top:20px; right:30px; font-size:30px; color:white; background:none; border:none; cursor:pointer;">✖</button>
+        <button onclick="changeLightbox(-1)" style="position:absolute; top:50%; left:10px; font-size:40px; color:white; background:rgba(0,0,0,0.5); border:none; cursor:pointer; padding:10px 15px; border-radius:10px;">◀</button>
+        <img id="lightboxImg" src="" style="max-width:90%; max-height:80%; border-radius:10px; border:2px solid #ff4b91; object-fit: contain;">
+        <button onclick="changeLightbox(1)" style="position:absolute; top:50%; right:10px; font-size:40px; color:white; background:rgba(0,0,0,0.5); border:none; cursor:pointer; padding:10px 15px; border-radius:10px;">▶</button>
     </div>
 
     <footer>
         <p>💕🦚 Radha Vallabh Shree Harivansh 🥰💚</p>
     </footer>
 
-    <script src="script.js"></script>
+    <!-- JS ENGINE LOGIC -->
+    <script>
+        // ==================== DARK / LIGHT MODE CONTROLLER ====================
+        function toggleTheme() {
+            document.body.classList.toggle("dark-mode");
+            const isDark = document.body.classList.contains("dark-mode");
+            localStorage.setItem("love_theme", isDark ? "dark" : "light");
+            document.getElementById("themeToggleBtn").innerText = isDark ? "☀️" : "🌙";
+        }
+
+        if (localStorage.getItem("love_theme") === "dark") {
+            document.body.classList.add("dark-mode");
+            window.addEventListener("DOMContentLoaded", () => {
+                const btn = document.getElementById("themeToggleBtn");
+                if(btn) btn.innerText = "☀️";
+            });
+        }
+
+        // ==================== BACKGROUND MUSIC PLAYER ====================
+        function toggleAudioPlay() {
+            const track = document.getElementById("bgMusicTrack");
+            const btn = document.getElementById("musicToggleBtn");
+            if (!track) return;
+
+            if (track.paused) {
+                track.play().then(() => {
+                    btn.classList.add("playing");
+                }).catch(err => {
+                    console.log("Audio play blocked by browser:", err);
+                });
+            } else {
+                track.pause();
+                btn.classList.remove("playing");
+            }
+        }
+
+        // ==================== LOVE DAY COUNTER ====================
+        function updateLoveCounter() {
+            const startDate = new Date("2025-10-29T16:00:00");
+            const now = new Date();
+            const diff = now - startDate;
+
+            if (diff > 0) {
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+                const mins = Math.floor((diff / (1000 * 60)) % 60);
+                const secs = Math.floor((diff / 1000) % 60);
+
+                const dEl = document.getElementById("cntDays");
+                const hEl = document.getElementById("cntHours");
+                const mEl = document.getElementById("cntMins");
+                const sEl = document.getElementById("cntSecs");
+
+                if (dEl) dEl.innerText = days;
+                if (hEl) hEl.innerText = hours;
+                if (mEl) mEl.innerText = mins;
+                if (sEl) sEl.innerText = secs;
+            }
+        }
+        setInterval(updateLoveCounter, 1000);
+
+        // ==================== DAILY LOVE JAR ====================
+        const jarQuotesList = [
+            "Shubhi, tumhaari masoomiyat aur tumhaari muskaan meri zindagi ki sabse paavan khushi hai! 🥰💖",
+            "Baccha aur Bebu forever! Zindagi ke har mod par mera haath tumhaare haath me rahega! 🤝💐",
+            "Telegram se shuru hua safar ab meri har ek saans aur rooh ka hissa ban chuka hai ✨",
+            "You are my safest home, my daily happiness, and my forever wifey! 🏡💍",
+            "Mera har ek kal aur mera har ek future plan bas tumhi par khatam hota hai bebu! 👑🌹",
+            "Shadi ke sapne aur zindagi bhar ka sath... Hum dono milkar har sapna sach karenge! 🎂💍"
+        ];
+        let currentJarIndex = 0;
+
+        function openLoveJarModal() {
+            currentJarIndex = 0;
+            renderJarQuote();
+            openModal("loveJarModal");
+        }
+
+        function renderJarQuote() {
+            const textEl = document.getElementById("loveJarText");
+            const countEl = document.getElementById("jarCounter");
+            if (textEl) textEl.innerText = `"${jarQuotesList[currentJarIndex]}"`;
+            if (countEl) countEl.innerText = `Note ${currentJarIndex + 1} of ${jarQuotesList.length}`;
+        }
+
+        function nextLoveJarQuote() {
+            currentJarIndex = (currentJarIndex + 1) % jarQuotesList.length;
+            renderJarQuote();
+        }
+
+        // ==================== 1. SECURITY & ANTI-INSPECT ====================
+        document.addEventListener('contextmenu', event => event.preventDefault());
+        document.onkeydown = function (e) {
+            if (e.keyCode == 123) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false;
+            if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false;
+        };
+
+        // ==================== 2. FIREBASE ARCHITECTURE ====================
+        const firebaseConfig = {
+            apiKey: "AIzaSyC7WXSZw0LEcRgkNEq0biY7IwCQVmvKBWY",
+            authDomain: "sachin-shubhi.firebaseapp.com",
+            databaseURL: "https://sachin-shubhi-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "sachin-shubhi",
+            storageBucket: "sachin-shubhi.firebasestorage.app"
+        };
+
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const db = firebase.database();
+
+        let currentProfile = localStorage.getItem("current_love_user") || null;
+        let currentPeer = currentProfile === "Sachin" ? "Shubhi" : "Sachin";
+
+        const nicknamesDataset = [
+            "Gullu Mullu 💕🦢", "My Love 💖🦢", "Pyari Cutiee 🥰💖", "My Happiness 💐👩‍❤️‍👨", "Environment 🌸😍",
+            "My Chocobar 💛💝", "My Lifeline 💑🐣", "My Heart MW💖", "Meri Rasguliii 💛💫", "My love 🌈💗",
+            "Shubhi bebu 🍇🤍", "Meri Babu 🍬💚", "Shubhi Singh 🍫🧚‍", "Meri Pyari 🎀🧝‍", "My Wifeyy🏡👰‍♀️",
+            "My Lady🏍👩‍💼", "My Queen 🌺👸", "My Baccha 💐👩‍❤️‍👨", "Meri Ladoo 🦋💃", "Sweetheart 💞👩", "janeman 👰🥰",
+            "Meri Fuljadhi 🙌❤️", "Gulabjamun 🤗🎊", "Mine Bebu 🦚🍥", "My Cutie 😍🥰", "Cutie Pie 🤲💝",
+            "Meri Swittu 🤗🎀", "Mere sacchu 💐👩‍❤️‍👨", "Meri Bebu 🤍🦢", "My Baby 💝🌼", "Rashbharrrriii 💖😍", "Jane Jahaa 🤫🐣",
+            "Jane Jiger ❤️🥰", "hot Chocolate 💋💕", "Meri Apsara 💍👑", " Mera Hero 💐👩‍❤️‍👨", "Shubhi Meena 🎀💐", "Eleget Lady🌹🎀",
+            "Spicey Jaan 🥳💞", "Meri Hotty 💐🎀", "Meri Rani 👩‍❤️‍👨💓", "Meri Morni 🦚💕", "Sonababu 🎀🌷",
+            "TheOnlyOne🔒🥰", "Laddo Rani 🎀🔥", "Hotty Bebu 🥰🔥",
+        ];
+
+        const timelineDataset = [
+            { time: "15 September 2000", title: "Sachin's (Baccha) Birthday 🎂", desc: "Is duniya me mera aana tabhi safal hua jab khuda ne meri kismat ko aage jaakar tumse jod diya.Meri zindagi ki shuruwat aapse hi hoti hai." },
+            { time: "12 July 2003", title: "Shubhi's (Bebu) Birthday 🎂", desc: "Zindagi ka sabsé khoobsurat din, kyunki aaj ke din meri poori duniya, meri khushi, aur meri wifey ne is dharti par kadam rakha tha." },
+            { time: "28 October 2025", title: "First Talk Online on Telegram 💬", desc: "Ek anjaan sa click aur wahan se shuru hua baaton ka silsila. Pata nahi tha ki Telegram par shuru hui ye chat ek din meri saanso ki zaroorat ban jayegi.", quote: "Pehli baar jab tumse baat hui, dil ko sukoon mil gaya..." },
+            { time: "24 December 2025", title: "Baccha Propose Bebu 'Yes' 💍", desc: "Wo pal jab maine apne dil ki baat kahi aur aapne muskura kar 'Haan' kaha. Us din se lekar aaj tak, main poori tarah sirf aur sirf aapka ho chuka hoon.", quote: "Duniya ki sabsé badi khushi aapka haan kehna tha..." },
+            { time: "26 December 2025", title: "First Private Day (Romantic) 🌹", desc: "Humare ishq ka wo pehla roohani aur romantic din. Jab duriyaan mit gayi thi aur sirf hum dono ki dhadkanein ek doosre se baatein kar rahi thi." },
+            { time: "03 January 2026", title: "First Hot Talks 🔥", desc: "Ishq ka wo daur jahan humari baaton me shararat, deewanapan aur ek doosre ko paane ki shiddat sabse gahri ho gayi thi. laila aur majnu ki trh pagalpen tha." },
+            { time: "12 July 2026", title: "Celebrating My Queen's Birthday 👑✨", desc: "Happy Birthday meri jaan, meri rasgulli, meri shubhi bebu! Aaj aapka janamdin hai aur sachin ka aapse ek wada hai—main aapse hamesha tutkar pyaar karunga aur aapki aankhon me kabhi aansu nahi aane dunga. Future plans me sirf aur sirf hum dono hain, hamesha ke liye ek sath!", quote: "Aap meri zindagi ka sabsé haseen tohfa ho bebu. I love you!" }
+        ];
+
+        const secureProfilesDataset = {
+            shubhi: {
+                "Name": "U2h1YmhpIFNpbmdoIChQcml5YW0vIFByaXlhKQ==",
+                "Caste Details": "R2VuZXJhbCwgUmFqcHV0LCBHb3V0cmE6IEJha2hzaA==",
+                "Parents": "TW90aGVyOiBBbnVqYSBTaW5naDsgRmF0aGVyOiBQYWRhbSBTaW5naA==",
+                "DOB Docs": "MTIgSnVseSAyMDAzIChhcyBwZXIgZG9jIDIwMDQp",
+                "Identity Mark": "QmxhY2sgTW9sZSBPbiBGYWNl",
+                "Education": "Q1NNVSBLYW5wdXIgTmFnZXIgVVA6IDg1JSwgMjAyNCwgUm9sbDogMjEwMjcwNTcwMTQ="
+            },
+            sachin: {
+                "Name": "U2FjaGluIE1lZW5h",
+                "Caste Details": "U1QsIE1lZW5hLCBHb3V0cmE6IEphcndhZA==",
+                "Parents": "TW90aGVyOiBSZWtoYSBNZWVuYSwgRmF0aGVyOiBLYWlsYXNoIENoYW5kIE1lZW5h",
+                "DOB Docs": "MTUgU2VwdGVtYmVyIDIwMDAgKGFzIHBlciBkb2MgMTIgSnVuZSAyMDAxKQ==",
+                "Identity Mark": "QmxhY2sgTW9sZSBPbiBGYWNl",
+                "Education": "UlJCTVUgQWx3YXIgUkogOiA3MCUgMjAyMiwgUm9sbCBObyAzMDU0MDM="
+            }
+        };
+
+        let galleryImagesList = [];
+        let currentLightboxIndex = 0;
+
+        document.addEventListener("DOMContentLoaded", () => {
+            compileStaticInterfaces();
+            evaluateSessionGuard();
+            updateLoveCounter();
+        });
+
+        function evaluateSessionGuard() {
+            if (localStorage.getItem("love_logged_in") === "true" && currentProfile) {
+                document.getElementById("mainNavbar").style.display = "flex";
+                document.getElementById("sessionLabel").innerText = `👤 Connected: ${currentProfile}`;
+                initiatePresenceEngine();
+                initiateChatEngine();
+
+                let savedView = localStorage.getItem("last_active_tab") || "home";
+                switchView(savedView);
+            } else {
+                handleLogoutCleanEffects();
+            }
+        }
+
+        // AUTO SCROLL TO BOTTOM UTILITY
+        function scrollChatToBottom() {
+            const scroller = document.getElementById('scroller');
+            if (scroller) {
+                requestAnimationFrame(() => {
+                    scroller.scrollTop = scroller.scrollHeight;
+                });
+            }
+        }
+
+        function switchView(viewId) {
+            if (localStorage.getItem("love_logged_in") !== "true" && viewId !== 'landing') {
+                switchView('landing'); return;
+            }
+            document.querySelectorAll("main > section").forEach(section => { section.className = "view-hidden"; });
+            const target = document.getElementById(`view-${viewId}`);
+            if (target) { target.className = "view-active"; }
+
+            document.querySelectorAll(".nav-btn").forEach(btn => btn.classList.remove("active"));
+            const activeNavBtn = document.getElementById(`nav-${viewId}`);
+            if (activeNavBtn) activeNavBtn.classList.add("active");
+
+            if (viewId !== 'landing') localStorage.setItem("last_active_tab", viewId);
+
+            // Auto-scroll when user switches to chat tab
+            if (viewId === 'chat') {
+                setTimeout(scrollChatToBottom, 50);
+            }
+        }
+
+        function openModal(id) { document.getElementById(id).classList.add("open"); }
+        function closeModal(id) { document.getElementById(id).classList.remove("open"); }
+
+        function buildGallery() {
+            const galContainer = document.getElementById("galleryContainer");
+            if (!galContainer) return;
+            galContainer.innerHTML = "";
+            galleryImagesList = [];
+
+            for (let i = 1; i <= 56; i++) {
+                let imgName = `img${i}.webp`;
+                galleryImagesList.push(imgName);
+                galContainer.innerHTML += `<img src="${imgName}" class="gallery-img" onclick="openLightbox(${i - 1})" onerror="this.src='https://api.dicebear.com/7.x/adventurer/svg?seed=Mem${i}'" alt="Memory ${i}">`;
+            }
+        }
+
+        function openLightbox(index) {
+            currentLightboxIndex = index;
+            const boxImg = document.getElementById("lightboxImg");
+            boxImg.src = galleryImagesList[currentLightboxIndex];
+            boxImg.onerror = function () { this.src = `https://api.dicebear.com/7.x/adventurer/svg?seed=Mem${currentLightboxIndex + 1}`; };
+            openModal("lightboxModal");
+        }
+
+        function changeLightbox(step) {
+            currentLightboxIndex += step;
+            if (currentLightboxIndex < 0) currentLightboxIndex = 55;
+            if (currentLightboxIndex >= 56) currentLightboxIndex = 0;
+            const boxImg = document.getElementById("lightboxImg");
+            boxImg.src = galleryImagesList[currentLightboxIndex];
+        }
+
+        function handleLogin() {
+            const u = btoa(document.getElementById('uid').value.trim());
+            const p = btoa(document.getElementById('pwd').value.trim());
+
+            let userMatched = null;
+            if (u === "c2FjaGluLnNz" && p === "YmFjY2hhQDE1") userMatched = "Sachin";
+            else if (u === "c2h1YmhpLnNz" && p === "YmVidUAxMg==") userMatched = "Shubhi";
+
+            if (userMatched) {
+                localStorage.setItem("love_logged_in", "true");
+                localStorage.setItem("current_love_user", userMatched);
+                localStorage.setItem("last_active_tab", "home");
+                currentProfile = userMatched;
+                currentPeer = userMatched === "Sachin" ? "Shubhi" : "Sachin";
+                document.getElementById('err').style.display = 'none';
+                closeModal('loginModal');
+                document.getElementById('uid').value = ""; document.getElementById('pwd').value = "";
+                evaluateSessionGuard();
+            } else { document.getElementById('err').style.display = 'block'; }
+        }
+
+        function handleLogout() {
+            if (confirm("Bebu/Baccha, kya aap sach me sign out karna chahte ho? 🥺")) {
+                if (currentProfile) db.ref(`presence/${currentProfile}`).set({ status: "offline", last_seen: getCurrentTimeLabel() });
+                handleLogoutCleanEffects();
+            }
+        }
+
+        function handleLogoutCleanEffects() {
+            localStorage.removeItem("love_logged_in");
+            localStorage.removeItem("current_love_user");
+            localStorage.removeItem("last_active_tab");
+            currentProfile = null; currentPeer = null;
+            document.getElementById("mainNavbar").style.display = "none";
+            switchView("landing");
+        }
+
+        function initiatePresenceEngine() {
+            const myPresenceRef = db.ref(`presence/${currentProfile}`);
+            db.ref('.info/connected').on('value', snapshot => {
+                if (snapshot.val() === false) return;
+                myPresenceRef.child('status').set('online');
+                myPresenceRef.child('status').onDisconnect().set('offline');
+                myPresenceRef.child('last_seen').onDisconnect().set(getCurrentTimeLabel());
+            });
+
+            const trackPresence = (target) => {
+                db.ref(`presence/${target}`).on('value', snapshot => {
+                    const data = snapshot.val() || {};
+                    const stateEl = document.getElementById(`stateLabel-${target}`);
+                    const seenEl = document.getElementById(`seenLabel-${target}`);
+                    if (!stateEl || !seenEl) return;
+                    if (data.status === 'online') {
+                        stateEl.innerHTML = `<span class="online-dot"></span><span style="color:#22c55e;">Online</span>`; seenEl.innerText = "";
+                    } else {
+                        stateEl.innerHTML = `<span class="offline-dot"></span>Offline`;
+                        seenEl.innerText = data.last_seen ? `Seen: ${data.last_seen}` : "";
+                    }
+                });
+            };
+            trackPresence("Sachin"); trackPresence("Shubhi");
+        }
+
+        function openProfileEditModal() {
+            db.ref(`editable_profiles/${currentProfile}`).once("value", snap => {
+                const data = snap.val() || {};
+                document.getElementById("modalBioInput").value = data.bio || "Love Hub...";
+                document.getElementById("modalMoodSelect").value = data.mood || "🥰 Happy & Loving";
+                openModal("profileEditModal");
+            });
+        }
+
+        function saveProfileChanges() {
+            const bio = document.getElementById("modalBioInput").value.trim();
+            const mood = document.getElementById("modalMoodSelect").value;
+            if (!bio) return alert("Bio empty nahi chhod sakte bebu!");
+            db.ref(`editable_profiles/${currentProfile}`).update({ bio: bio, mood: mood }, () => { closeModal("profileEditModal"); });
+        }
+
+        function inspectUserBio(targetUser) {
+            db.ref(`editable_profiles/${targetUser}`).once("value", snap => {
+                const data = snap.val() || {};
+                document.getElementById("inspectDp").src = targetUser === "Sachin" ? "sachin.webp" : "shubhi.webp";
+                document.getElementById("inspectName").innerText = targetUser === "Sachin" ? "Sachin Meena" : "Shubhi Singh";
+                document.getElementById("inspectMood").innerText = `Mood: ${data.mood || "🥰 Happy & Loving"}`;
+                document.getElementById("inspectBio").innerText = data.bio || "No custom bio configured yet.";
+                openModal("inspectProfileModal");
+            });
+        }
+
+        function escapeHTML(str) {
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        /* CHAT ENGINE LOGIC WITH SCROLLER FIX & TIME REAL-TIME LOADING */
+        function initiateChatEngine() {
+            const peerTypingRef = db.ref(`typing/${currentPeer}`);
+            peerTypingRef.on("value", snapshot => {
+                const el = document.getElementById("typingTag");
+                if (el) el.innerText = snapshot.val() ? `${currentPeer} is typing... 💕` : "";
+            });
+
+            const scroller = document.getElementById('scroller');
+            if (scroller) scroller.innerHTML = "";
+
+            // Limit query to last 100 messages for fast performance & timing
+            db.ref("global_chats").off();
+            db.ref("global_chats").limitToLast(100).on("child_added", snapshot => {
+                const data = snapshot.val();
+                if (!scroller || !data) return;
+                
+                const div = document.createElement('div');
+                div.classList.add('msg', data.user === currentProfile ? 'me' : 'you');
+                
+                const safeText = escapeHTML(data.text || '');
+                const safeTime = escapeHTML(data.time || '');
+                
+                div.innerHTML = `<p style="margin:2px 0; font-size:13.5px; line-height:1.4;">${safeText}</p><span style="font-size:9px; opacity:0.8; display:block; text-align:right; margin-top:3px;">${safeTime}</span>`;
+                
+                scroller.appendChild(div);
+                scrollChatToBottom();
+            });
+        }
+
+        let typingTimeout;
+        function handleTyping() {
+            if (!currentProfile) return;
+            db.ref(`typing/${currentProfile}`).set(true);
+            clearTimeout(typingTimeout);
+            typingTimeout = setTimeout(() => { if (currentProfile) db.ref(`typing/${currentProfile}`).set(false); }, 2000);
+        }
+
+        function dispatch() {
+            const box = document.getElementById('msgText');
+            if (!box || !box.value.trim()) return;
+            const textVal = box.value.trim();
+            box.value = ""; 
+            
+            db.ref("global_chats").push({ 
+                user: currentProfile || localStorage.getItem("current_love_user") || "Sachin", 
+                text: textVal, 
+                time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) 
+            }).then(() => {
+                scrollChatToBottom();
+            });
+
+            if (currentProfile) db.ref(`typing/${currentProfile}`).set(false);
+        }
+
+        function compileStaticInterfaces() {
+            const nickBox = document.getElementById("nicknamesContainer");
+            if (nickBox) nicknamesDataset.forEach(n => { nickBox.innerHTML += `<div>${n}</div>`; });
+
+            const timeBox = document.getElementById("timelineContainer");
+            if (timeBox) {
+                timelineDataset.forEach(node => {
+                    timeBox.innerHTML += `<div class="node"><span class="time-lbl">${node.time}</span><h4>${node.title}</h4><p>${node.desc}</p>${node.quote ? `<span class="love-quote">"${node.quote}"</span>` : ''}</div>`;
+                });
+            }
+
+            const drawSecureProfile = (targetId, set) => {
+                const el = document.getElementById(targetId); if (!el) return;
+                for (let k in set) { el.innerHTML += `<div class="row"><span class="lbl">${k}</span><span class="val">${atob(set[k])}</span></div>`; }
+            };
+            drawSecureProfile("shubhiTarget", secureProfilesDataset.shubhi);
+            drawSecureProfile("sachinTarget", secureProfilesDataset.sachin);
+            buildGallery();
+        }
+
+        function switchSpaceTab(id) {
+            document.getElementById("tab-bd").style.display = id === "bd" ? "block" : "none";
+            document.getElementById("tab-pr").style.display = id === "pr" ? "block" : "none";
+            document.getElementById("tabBtn-bd").className = id === "bd" ? "tab-btn active" : "tab-btn";
+            document.getElementById("tabBtn-pr").className = id === "pr" ? "tab-btn active" : "tab-btn";
+        }
+
+        function getCurrentTimeLabel() { return new Date().toLocaleString([], { hour: '2-digit', minute: '2-digit', day: 'numeric', month: 'short' }); }
+    </script>
 </body>
 
 </html>
